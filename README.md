@@ -1,8 +1,8 @@
 # Inclinometer
 
-Digitaler 0-360° Neigungsmesser/Winkelmesser
-Laufzeit: ca. 15h
-Ladezeit: 2,5h (Über USB)
+- Digitaler 0-360° Neigungsmesser/Winkelmesser
+- Laufzeit: ca. 15h
+- Ladezeit: 2,5h (Über USB)
 
 # Hardware
 
