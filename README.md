@@ -9,7 +9,7 @@
 
 
 ## USB-Kommunikation
-USB --> (VCP) VirtaulComPort
+USB --> (VCP) VirtualComPort
 
 # Software
 
