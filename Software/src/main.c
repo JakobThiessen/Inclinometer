@@ -508,7 +508,6 @@ void drawAkku(uint8_t stat)
 	}
 }
 
-
 void drawOuterFrame(void)
 {
 	SSD1306_DrawLine(0, 0, 127, 0, TRUE);		// ----------
