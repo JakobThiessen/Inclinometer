@@ -65,6 +65,7 @@ int8_t user_spi_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint1
 void drawAngle(int32_t angle);
 void drawAkku(uint8_t stat);
 void drawWinkelSymbol(void);
+void drawOuterFrame(void);
 void drawTemeprature(int32_t t);
 void drawAverageFaktor(uint8_t f);
 void drawMinMaxWinkel(int32_t minValue, int32_t maxValue);
@@ -460,12 +461,25 @@ int main (void)
 		
 		if(currentAngle < minAngle) minAngle = currentAngle;
 		if(currentAngle > maxAngle) maxAngle = currentAngle;
-
+		
+		drawOuterFrame();
 		drawTemeprature(tmp);
 		drawAngle(currentAngle);
 		drawMinMaxWinkel( minAngle, maxAngle );
-		
+	
+		if(accel.y < -5000)
+		{
+			SSD1306_FlipHorizontalDisplay(false);
+		}
+		else
+		{
+			SSD1306_FlipHorizontalDisplay(true);
+		}
+			
 		SSD1306_Display();      // Show initial text
+
+
+		
 		delay_ms(10);
 		
 		if(my_flag_DTR)	
@@ -494,13 +508,22 @@ void drawAkku(uint8_t stat)
 	}
 }
 
+
+void drawOuterFrame(void)
+{
+	SSD1306_DrawLine(0, 0, 127, 0, TRUE);		// ----------
+	SSD1306_DrawLine(0, 63, 127, 63, TRUE);		// |
+	SSD1306_DrawLine(0, 0, 0, 63, TRUE);		//			 | 
+	SSD1306_DrawLine(127, 0, 127, 63, TRUE);	// ___________
+}
+
 void drawTemeprature(int32_t t)
 {
 	char str_adc[7];
 	sprintf(str_adc, "%d%c", t, 167);
-	SSD1306_DrawText(17, 0, str_adc, 2);
+	SSD1306_DrawText(17, 1, str_adc, 2);
 	
-	SSD1306_DrawBMP(0, 0, temperature_icon16x16, 16, 16);
+	SSD1306_DrawBMP(1, 1, temperature_icon16x16, 16, 16);
 	SSD1306_DrawLine(63, 0, 63, 17, TRUE);
 }
 
@@ -513,7 +536,7 @@ void drawAverageFaktor(uint8_t f)
 
 void drawAngle(int32_t angle)
 {
-	SSD1306_DrawLine(4, 17, 124, 17, TRUE);
+	SSD1306_DrawLine(1, 17, 126, 17, TRUE);
 	
 	int vorkomma = (int)angle/100;
 	int nachkomma = abs((int)(angle - vorkomma*100));
@@ -532,7 +555,7 @@ void drawWinkelSymbol(void)
 
 void drawMinMaxWinkel(int32_t minValue, int32_t maxValue)
 {	
-	SSD1306_DrawLine(4, 52, 124, 52, TRUE);
+	SSD1306_DrawLine(1, 52, 126, 52, TRUE);
 	SSD1306_DrawLine(63, 52, 63, 64, TRUE);
 	
 	char text[12];
@@ -541,12 +564,12 @@ void drawMinMaxWinkel(int32_t minValue, int32_t maxValue)
 	int nachkomma = abs((int)(minValue - vorkomma*100));
 
 	sprintf(text, "%c %d.%02d", 31, vorkomma, nachkomma);
-	SSD1306_DrawText(5, 56, text, 1);
+	SSD1306_DrawText(5, 55, text, 1);
 	
 	memset(text, 0, 12);
 	vorkomma = (int)maxValue/100;
 	nachkomma = abs((int)(maxValue - vorkomma*100));
 
 	sprintf(text, "%c %d.%02d", 30, vorkomma, nachkomma);
-	SSD1306_DrawText(70, 56, text, 1);
+	SSD1306_DrawText(70, 55, text, 1);
 }
