@@ -596,6 +596,30 @@ void SSD1306_InvertDisplay(bool i)
     ssd1306_command(SSD1306_NORMALDISPLAY);
 }
 
+void SSD1306_FlipHorizontalDisplay(bool i)
+{
+	//Set MUX ratio(A8h)
+	//COM Normal / Remapped (C0h / C8h)
+	if (i)
+	{
+		ssd1306_command(SSD1306_SEGREMAP | 0x01);				// 0xA1
+
+		ssd1306_command(SSD1306_COMSCANDEC);					// C8 = Remapped
+		ssd1306_command(SSD1306_SETDISPLAYOFFSET);              // 0xD3 (Display Offset)
+		ssd1306_command(0x0);                                   // no offset
+		ssd1306_command(SSD1306_SETSTARTLINE | 0x0);            // Start line = 0
+	}
+	else
+	{
+		ssd1306_command(SSD1306_SEGREMAP);						// 0xA0 
+
+		ssd1306_command(SSD1306_COMSCANINC);					// C0 = Normal
+		ssd1306_command(SSD1306_SETDISPLAYOFFSET);              // 0xD3 (Display Offset)
+		ssd1306_command(0x0);                                   // no offset
+		ssd1306_command(SSD1306_SETSTARTLINE | 0x0);            // Start line = 0
+	}
+}
+
 void SSD1306_SetTextWrap(bool w)
 {
   wrap = w;

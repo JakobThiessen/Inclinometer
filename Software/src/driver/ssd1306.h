@@ -142,6 +142,7 @@ void SSD1306_Print(uint8_t c);
 void SSD1306_PutCustomC(uint8_t *c);
 void SSD1306_SetTextWrap(bool w);
 void SSD1306_InvertDisplay(bool i);
+void SSD1306_FlipHorizontalDisplay(bool i);
 void SSD1306_DrawBMP(uint8_t x, uint8_t y, uint8_t *bitmap, uint8_t w, uint8_t h);
 void SSD1306_ROMBMP(uint8_t x, uint8_t y, uint8_t *bitmap, uint8_t w, uint8_t h);
 
