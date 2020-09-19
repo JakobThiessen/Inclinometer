@@ -7,7 +7,9 @@
 # Hardware
 
 2 x BMI160
+
 SSD1306
+
 USB --> (VCP) VirtualComPort
 
 # Todo:
