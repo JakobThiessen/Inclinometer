@@ -30,7 +30,7 @@ https://github.com/microsoft/uf2-samdx1
 
 ## Pictures
 
-![Tux, the Linux](images\tux.png)
+![Tux, the Linux](images/tux.png)
 
 ## Hyperlink
 
