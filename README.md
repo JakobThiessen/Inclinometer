@@ -77,6 +77,8 @@ int main() {
 
 ## Mathe
 
+\begin{equation}
 >Formel  (2)
 >$$ c^2 = \sqrt{a^2+b^2} (2) 
 >
+\end{equation}
